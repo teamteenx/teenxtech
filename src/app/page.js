@@ -1,17 +1,66 @@
 "use client";
-import { NavFuckingBar } from "@/components/layouts/navbar";
-import { Hero } from "@/components/layouts/sections/hero";
-import { AboutSection } from "@/components/layouts/sections/about";
-import { BenefitsSection } from "@/components/layouts/sections/benefits";
-import { ServicesSection } from "@/components/layouts/sections/services";
-import { FAQSection } from "@/components/layouts/sections/faq";
-import { CtaConsult } from "@/components/layouts/sections/cta-consult";
-import { ContactSection } from "@/components/layouts/sections/contact";
 
+import dynamic from "next/dynamic";
 import { useEffect } from "react";
+import { NavFuckingBar } from "@/components/layouts/navbar";
+import ScrollSection from "@/components/ui/ScrollSection";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
-import { ScrollSection } from "@/components/ui/ScrollSection";
-import { Footer } from "@/components/layouts/footer";
+
+const AboutSection = dynamic(
+  () =>
+    import("@/components/layouts/sections/about").then((m) => m.AboutSection),
+  { ssr: true, loading: () => <SectionSkeleton minH={700} /> }
+);
+const BenefitsSection = dynamic(
+  () =>
+    import("@/components/layouts/sections/benefits").then(
+      (m) => m.BenefitsSection
+    ),
+  { ssr: true, loading: () => <SectionSkeleton minH={700} /> }
+);
+const ServicesSection = dynamic(
+  () =>
+    import("@/components/layouts/sections/services").then(
+      (m) => m.ServicesSection
+    ),
+  { ssr: true, loading: () => <SectionSkeleton minH={800} /> }
+);
+const FAQSection = dynamic(
+  () => import("@/components/layouts/sections/faq").then((m) => m.FAQSection),
+  { ssr: true, loading: () => <SectionSkeleton minH={700} /> }
+);
+const ContactSection = dynamic(
+  () =>
+    import("@/components/layouts/sections/contact").then(
+      (m) => m.ContactSection
+    ),
+  { ssr: true, loading: () => <SectionSkeleton minH={800} /> }
+);
+const CtaConsult = dynamic(
+  () =>
+    import("@/components/layouts/sections/cta-consult").then(
+      (m) => m.CtaConsult
+    ),
+  { ssr: true, loading: () => <SectionSkeleton minH={300} /> }
+);
+const Hero = dynamic(
+  () => import("@/components/layouts/sections/hero").then((m) => m.Hero),
+  { ssr: true }
+);
+const Footer = dynamic(
+  () => import("@/components/layouts/footer").then((m) => m.Footer),
+  { ssr: true }
+);
+
+function SectionSkeleton({ minH = 600 }) {
+  return (
+    <div
+      className="mx-auto w-full max-w-6xl animate-pulse rounded-2xl border border-white/10 bg-white/5 dark:bg-neutral-900/60"
+      style={{ minHeight: minH }}
+      aria-hidden="true"
+    />
+  );
+}
 
 export default function Home() {
   const activeId = useScrollSpy({ selector: "section[id]", heroId: "hero" });

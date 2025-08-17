@@ -181,8 +181,10 @@ export const NavbarLogo = () => {
       href="#"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
-      <img src="/images/TEENX-LOGO.jpg" alt="logo" width={30} height={30} />
-      <span className="font-medium text-black dark:text-white">TEENX TECH</span>
+      <img src="/images/teenx.jpg" alt="logo" width={30} height={30} />
+      <span className="font-medium text-black dark:text-white sr-only">
+        TEENX TECH
+      </span>
     </a>
   );
 };

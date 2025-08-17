@@ -114,7 +114,6 @@ export default function RootLayout({ children }) {
       },
     },
   ];
-
   return (
     <html
       lang="id"
@@ -123,7 +122,9 @@ export default function RootLayout({ children }) {
       className={cn(geistSans.variable, geistMono.variable)}
     >
       <head>
-        {/* biar ga kena flash */}
+        {/* Preload LCP hero image to stabilize LCP */}
+        <link rel="preload" as="image" href="/images/teenx.jpg" />
+        {/* Prevent theme flash before hydration */}
         <Script id="theme-init" strategy="beforeInteractive">
           {`
             (function() {

@@ -57,7 +57,7 @@ export const DesktopOrbital = ({
               key={item.id}
               className="absolute will-change-transform"
               style={{
-                transform: `translate(${pos.x}px, ${pos.y}px)`,
+                transform: `translate(${pos.x}px, ${pos.y}px) translateZ(0)`,
                 zIndex: expanded ? 200 : pos.zIndex,
                 opacity: expanded ? 1 : pos.opacity,
                 transition: "transform 300ms ease, opacity 300ms ease",
@@ -72,7 +72,7 @@ export const DesktopOrbital = ({
                   toggleItem(item.id);
                 }}
                 className={[
-                  "flex size-10 items-center justify-center rounded-full border-2 transition-all",
+                  "flex size-10 items-center justify-center rounded-full border-2 transition-all will-change-transform",
                   expanded
                     ? "scale-150 border-white bg-white text-black shadow-lg shadow-white/30"
                     : related

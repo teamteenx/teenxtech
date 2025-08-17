@@ -10,6 +10,7 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizeable-navbar";
+import Link from "next/link";
 import { useCallback, useState } from "react";
 
 export function NavFuckingBar() {
@@ -71,7 +72,12 @@ export function NavFuckingBar() {
           <NavbarLogo />
           <NavItems items={navItems} onItemClick={handleNavClick} />
           <div className="flex items-center gap-4">
-            <NavbarButton variant="primary">Konsultasi</NavbarButton>
+            <Link
+              href="#contact"
+              className="relative text-black font-bold text-md bg-white p-1 rounded-lg hover:bg-transparent hover:text-white hover:border-[1px] border-white transition-colors duration-300"
+            >
+              Konsultasi
+            </Link>
           </div>
         </NavBody>
 
@@ -103,13 +109,13 @@ export function NavFuckingBar() {
               </a>
             ))}
             <div className="flex w-full flex-col gap-4">
-              <NavbarButton
+              <Link
                 onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
+                href="#contact"
+                className="relative text-black font-bold text-md bg-white p-3 rounded-lg hover:bg-transparent hover:text-white hover:border-[1px] border-white transition-colors duration-300"
               >
                 Konsultasi
-              </NavbarButton>
+              </Link>
             </div>
           </MobileNavMenu>
         </MobileNav>

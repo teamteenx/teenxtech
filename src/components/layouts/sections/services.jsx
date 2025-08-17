@@ -1,5 +1,3 @@
-"use client";
-
 import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
 import { Gpu, Code, AppWindow, User } from "lucide-react";
 
