@@ -11,6 +11,7 @@ import { ContactSection } from "@/components/layouts/sections/contact";
 import { useEffect } from "react";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { ScrollSection } from "@/components/ui/ScrollSection";
+import { Footer } from "@/components/layouts/footer";
 
 export default function Home() {
   const activeId = useScrollSpy({ selector: "section[id]", heroId: "hero" });
@@ -67,6 +68,8 @@ export default function Home() {
       <ScrollSection id="contact">
         <ContactSection />
       </ScrollSection>
+
+      <Footer />
     </>
   );
 }
