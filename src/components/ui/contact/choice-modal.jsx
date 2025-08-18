@@ -51,7 +51,7 @@ export function ContactChoiceModal({
             WhatsApp
           </Button>
           <Button onClick={onEmail} disabled={sendingEmail} className="w-full">
-            {sendingEmail ? "Mengirim..." : "Email (Resend)"}
+            {sendingEmail ? "Mengirim..." : "Email"}
           </Button>
         </div>
         <button

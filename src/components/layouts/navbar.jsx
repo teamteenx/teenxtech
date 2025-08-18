@@ -5,41 +5,25 @@ import {
   NavItems,
   MobileNav,
   NavbarLogo,
-  NavbarButton,
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizeable-navbar";
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 export function NavFuckingBar() {
-  const navItems = [
-    {
-      name: "Home",
-      link: "#hero",
-    },
-    {
-      name: "About",
-      link: "#about",
-    },
-    {
-      name: "Benefits",
-      link: "#benefits",
-    },
-    {
-      name: "Services",
-      link: "#services",
-    },
-    {
-      name: "FAQ",
-      link: "#faq",
-    },
-    {
-      name: "Contact",
-      link: "#contact",
-    },
-  ];
+  const navItems = useMemo(
+    () => [
+      { name: "Home", link: "#hero" },
+      { name: "About", link: "#about" },
+      { name: "Benefits", link: "#benefits" },
+      { name: "Services", link: "#services" },
+      { name: "FAQ", link: "#faq" },
+      { name: "Contact", link: "#contact" },
+    ],
+    []
+  );
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -50,11 +34,9 @@ export function NavFuckingBar() {
         const id = link.slice(1);
         const el = document.getElementById(id);
         if (el) {
-          const nav = document.querySelector("[data-navbar]");
-          const navH = nav ? nav.getBoundingClientRect().height : 0;
-          const top =
-            window.scrollY + el.getBoundingClientRect().top - navH - 8;
-          window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+          // offset by navbar height var
+          el.style.scrollMarginTop = "calc(var(--nav-h, 0px) + 8px)";
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       } else {
         window.location.href = link;
@@ -64,45 +46,51 @@ export function NavFuckingBar() {
     }
   }, []);
 
+  const onMobileItemClick = useCallback(
+    (e) => {
+      e.preventDefault();
+      const link = e.currentTarget.getAttribute("href");
+      if (link) handleNavClick(link);
+    },
+    [handleNavClick]
+  );
+
   return (
     <div className="relative w-full z-50">
       <Navbar>
-        {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} onItemClick={handleNavClick} />
           <div className="flex items-center gap-4">
             <Link
               href="#contact"
-              className="relative text-black font-bold text-md bg-white p-1 rounded-lg hover:bg-transparent hover:text-white hover:border-[1px] border-white transition-colors duration-300"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick("#contact");
+              }}
+              className="relative text-black font-bold text-md bg-white p-2 rounded-lg hover:bg-transparent hover:text-white hover:border-[1px] hover:underline border-white transition-colors duration-200"
             >
               Konsultasi
             </Link>
           </div>
         </NavBody>
 
-        {/* Mobile Navigation */}
         <MobileNav>
           <MobileNavHeader>
             <NavbarLogo />
             <MobileNavToggle
               isOpen={isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              controlsId="mobile-menu"
+              onClick={() => setIsMobileMenuOpen((v) => !v)}
             />
           </MobileNavHeader>
 
-          <MobileNavMenu
-            isOpen={isMobileMenuOpen}
-            onClose={() => setIsMobileMenuOpen(false)}
-          >
+          <MobileNavMenu id="mobile-menu" isOpen={isMobileMenuOpen}>
             {navItems.map((item, idx) => (
               <a
                 key={`mobile-link-${idx}`}
                 href={item.link}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(item.link);
-                }}
+                onClick={onMobileItemClick}
                 className="relative text-neutral-300"
               >
                 <span className="block">{item.name}</span>
@@ -110,7 +98,10 @@ export function NavFuckingBar() {
             ))}
             <div className="flex w-full flex-col gap-4">
               <Link
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick("#contact");
+                }}
                 href="#contact"
                 className="relative text-black font-bold text-md bg-white p-3 rounded-lg hover:bg-transparent hover:text-white hover:border-[1px] border-white transition-colors duration-300"
               >
@@ -120,7 +111,6 @@ export function NavFuckingBar() {
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-      {/* Navbar */}
     </div>
   );
 }

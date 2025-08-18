@@ -45,7 +45,7 @@ export const ContactForm = ({
 
   return (
     <section className="py-32">
-      <div className="container">
+      <div className="container mx-auto">
         <div className="mx-auto flex max-w-screen-xl flex-col justify-between gap-10 lg:flex-row lg:gap-20">
           {/* Left: info */}
           <div className="mx-auto flex max-w-sm flex-col justify-between gap-10">

@@ -18,7 +18,8 @@ const geistMono = Geist_Mono({
 const SITE_NAME = "TeenX";
 const SITE_DESCRIPTION =
   "TEENX TECH — Partner IT Support masa kini. Servis hardware & software, pembuatan website, serta program reseller & affiliate. Cepat, transparan, profesional.";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://teenxtech.vercel.app";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -89,8 +90,9 @@ export const metadata = {
   },
   manifest: "/site.webmanifest",
   other: {
-    "color-scheme": "light dark",
+    "color-scheme": "dark",
   },
+  themeColor: "#0a0a0a",
 };
 
 export default function RootLayout({ children }) {
@@ -118,27 +120,11 @@ export default function RootLayout({ children }) {
     <html
       lang="id"
       dir="ltr"
-      suppressHydrationWarning
-      className={cn(geistSans.variable, geistMono.variable)}
+      className={cn("dark", geistSans.variable, geistMono.variable)}
     >
       <head>
-        {/* Preload LCP hero image to stabilize LCP */}
+        {/* Preload LCP hero image */}
         <link rel="preload" as="image" href="/images/teenx.jpg" />
-        {/* Prevent theme flash before hydration */}
-        <Script id="theme-init" strategy="beforeInteractive">
-          {`
-            (function() {
-              try {
-                var stored = localStorage.getItem('theme');
-                var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                var theme = stored || (systemDark ? 'dark' : 'light');
-                var root = document.documentElement;
-                if (theme === 'dark') root.classList.add('dark');
-                else root.classList.remove('dark');
-              } catch (_) {}
-            })();
-          `}
-        </Script>
         {/* Structured data for SEO */}
         <Script
           id="ld-json"
@@ -149,8 +135,7 @@ export default function RootLayout({ children }) {
       </head>
       <body
         className={cn(
-          "min-h-screen overflow-x-hidden bg-white text-gray-900 antialiased",
-          "dark:bg-neutral-950 dark:text-gray-100"
+          "min-h-screen overflow-x-hidden bg-neutral-950 text-gray-100 antialiased"
         )}
       >
         <a
