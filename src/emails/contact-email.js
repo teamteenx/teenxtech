@@ -1,3 +1,9 @@
+/**
+ *
+ SEMUA INI DI BUAT DENGAN AI, YEAH AI, TBH I REALLY DISLIKE BEING A PROGRAMMER. I SPENT YEARS THEN BE REPLACED BY A MACHINE, ISNT THAT FUNNY ? THAT IS GONNA BE A GOOD PRANK ON THE FUTURE, MAKE THEM STUDY SOFTWARE ENGINEERING OR COMPLEX SUBJECTS THAT WILL RUIN THEIR LIFE, THEN REPLACE THEM WITH A MACHINE, HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAH, I THINK IMMA SELL COCAINE INSTEAD!
+ *
+ */
+
 function escapeHTML(input = "") {
   return String(input)
     .replace(/&/g, "&amp;")
@@ -40,7 +46,7 @@ export function renderContactEmail({
     siteUrl,
   ].join("\n");
 
-  const ACCENT = "#111111"; // black accent for the monochrome aesthetic
+  const ACCENT = "#111111";
   const BORDER = "#ececec";
   const BG_PAGE = "#f6f7f9";
   const FG_MAIN = "#111111";
